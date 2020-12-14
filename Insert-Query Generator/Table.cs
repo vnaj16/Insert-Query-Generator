@@ -65,10 +65,31 @@ namespace Insert_Query_Generator
 
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
-                        row.Add(Convert.ToString(reader[i]));
+                        var value = Convert.ToString(reader[i]);
+
+                        if (value != "")
+                        {
+
+                            var type = reader.GetFieldType(i).Name;
+                            if (type == "String")
+                            {
+                                value = "'" + value + "'";
+                            }
+
+                            Console.WriteLine("Tipo de la columna " + i + " :" + type);
+                            Console.WriteLine("Valor de la columa: " + value);
+                        }
+                        else
+                        {
+                            value = "NULL";
+                            Console.WriteLine("Valor de la columa: " + "NULL");
+                        }
+
+                        row.Add(value);
+
                         if (!isCNComplete)
                         {
-                            columnNames.Add(reader.GetName(i));
+                            columnNames.Add(reader.GetName(i));   
                         }
                     }
                     isCNComplete = true;

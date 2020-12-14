@@ -12,6 +12,8 @@ namespace Insert_Query_Generator
         {
             string rpta = "";
 
+            // TODO: Considerar los tipos String ('2018-10-10') en el Statement y los NULL en la clase Table line 70
+
             string DataSource = "";
             string Catalog = "";
 
@@ -40,6 +42,10 @@ namespace Insert_Query_Generator
                     {
                         Console.WriteLine(query);
                     }
+
+                    Console.WriteLine("Writing content in the file statements.sql");
+                    SqlFileWriter sqlFileWriter = new SqlFileWriter();
+                    sqlFileWriter.WriteQueryOnFileSql(queries, "statements");
 
                     dataBase.Desconectar();
                 }
