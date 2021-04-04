@@ -17,10 +17,10 @@ namespace Insert_Query_Generator
             string DataSource = "";
             string Catalog = "";
 
-            Console.Write("Ingrese el datasource: ");
+            Console.Write("Ingrese el la cadena de conexion (ejm: 'DESKTOP-KPGGNBL\\SQLEXPRESS'): ");
             DataSource = Console.ReadLine();
 
-            Console.Write("Ingrese el catalog: ");
+            Console.Write("Ingrese el nombre de la base de datos: ");
             Catalog = Console.ReadLine();
 
             while (rpta != "+")
@@ -45,7 +45,7 @@ namespace Insert_Query_Generator
 
                     Console.WriteLine("Writing content in the file statements.sql");
                     SqlFileWriter sqlFileWriter = new SqlFileWriter();
-                    sqlFileWriter.WriteQueryOnFileSql(queries, "statements");
+                    sqlFileWriter.WriteQueryOnFileSql(queries, table.GetTableName()+"statements", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
 
                     dataBase.Desconectar();
                 }
@@ -63,7 +63,7 @@ namespace Insert_Query_Generator
 
                 Console.WriteLine("State of connection: " + connection.State);*/
 
-                Console.ReadKey();
+                //Console.ReadKey();
             }
         }
     }
