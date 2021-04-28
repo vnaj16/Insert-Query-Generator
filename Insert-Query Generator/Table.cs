@@ -67,13 +67,25 @@ namespace Insert_Query_Generator
                     {
                         var value = Convert.ToString(reader[i]);
 
-                        if (value != "")
+                        if (value != "" || !(value is null))
                         {
 
                             var type = reader.GetFieldType(i).Name;
-                            if (type == "String")
+                            if (type == "String" || type == DateTime.Now.GetType().Name || type == "Date")
                             {
                                 value = "'" + value + "'";
+                            }
+
+                            if(type == "Boolean")
+                            {
+                                if (value == "True")
+                                {
+                                    value = "1";
+                                }
+                                else
+                                {
+                                    value = "0";
+                                }
                             }
 
                             Console.WriteLine("Tipo de la columna " + i + " :" + type);
